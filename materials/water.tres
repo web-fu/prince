@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bdjswu1qm8ntq"]
 
-[ext_resource type="Texture2D" uid="uid://cvbml4ubsd6qj" path="res://assets/hexagons_medieval.png" id="1_xdgs7"]
+[ext_resource type="Texture2D" uid="uid://cvbml4ubsd6qj" path="res://models/tiles/hexagons_medieval.png" id="1_xdgs7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mro6u"]
 atlas = ExtResource("1_xdgs7")
