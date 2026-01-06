@@ -7,8 +7,8 @@ func generate(seed:int):
 	rng.seed = seed
 
 	# crea griglia
-	for q in range(-50, 50):
-		for r in range(-50, 50):
+	for q in range(0, Common.grid_size.x):
+		for r in range(0, Common.grid_size.y):
 			grid.add_hex(q, r)
 
 	var plates = PlateGenerator.generate(grid, 12, rng)
