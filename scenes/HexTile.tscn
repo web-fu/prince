@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnapjklk1op5u"]
-
-[ext_resource type="PackedScene" uid="uid://cmkybirje8i2q" path="res://models/tiles/hex_grass.fbx" id="1_yhsod"]
-
-[node name="HexTile" type="Node3D"]
-
-[node name="hex_grass" parent="." instance=ExtResource("1_yhsod")]

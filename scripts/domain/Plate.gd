@@ -15,4 +15,4 @@ func _init(id:int, origin:Vector2i, rng:RandomNumberGenerator):
 	).normalized()
 
 	is_continental = rng.randf() < 0.3
-	base_elevation = rng.randi_range(0, 2) if is_continental else rng.randi_range(-3, -1)
+	base_elevation = rng.randi_range(0, 5) if is_continental else rng.randi_range(-3, -1)
