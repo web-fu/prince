@@ -7,11 +7,12 @@ func generate(seed:int):
 	rng.seed = seed
 
 	# crea griglia
-	for q in range(0, Common.grid_size.x):
-		for r in range(0, Common.grid_size.y):
+	for q in range(0, Common.grid_size.q):
+		for r in range(0, Common.grid_size.q):
 			grid.add_hex(q, r)
 
-	var plates = PlateGenerator.generate(grid, 12, rng)
+	var plates = PlateGenerator.generate(grid, Common.TECTONIC_PLATES, rng)
+	
 	Tectonics.compute_stress(grid, plates)
 	ElevationGenerator.apply(grid)
 	Smoothing.smooth(grid, 5)

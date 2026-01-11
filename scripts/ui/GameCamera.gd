@@ -15,13 +15,13 @@ func _process(delta):
 	if position.z > vertical_camera_top:
 		if Input.is_action_pressed("move_top"):
 			direction.z -= 1
-	if position.z < Common.grid_size.y:
+	if position.z < Common.grid_size.q * 1.3:
 		if Input.is_action_pressed("move_bottom"):
 			direction.z += 1
 	position = lerp(position, direction, camera_speed)
-	if position.x < - Common.grid_size.x / 4:
-		position.x += Common.grid_size.x
-		direction.x += Common.grid_size.x
-	if position.x > Common.grid_size.x * 5 / 4:
-		position.x -= Common.grid_size.x
-		direction.x -= Common.grid_size.x
+	#if position.x < - Common.grid_size.q / 4:
+		#position.x += Common.grid_size.q
+		#direction.x += Common.grid_size.q
+	#if position.x > Common.grid_size.q * 5 / 4:
+		#position.x -= Common.grid_size.q
+		#direction.x -= Common.grid_size.q

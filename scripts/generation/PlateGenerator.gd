@@ -17,15 +17,12 @@ static func generate(grid:HexGrid, plate_count:int, rng:RandomNumberGenerator) -
 		var best_dist := INF
 
 		for plate in plates:
-			var d = hex_distance(hex, plate.origin)
+			var d = Common.hex_distance(hex, plate.origin)
 			if d < best_dist:
 				best_dist = d
 				closest = plate
 
 		hex.plate_id = closest.id
-		hex.elevation = closest.base_elevation
+		hex.elevation = closest.base_elevation #* Common.SMOOTH
 
 	return plates
-
-static func hex_distance(h:Hex, p:Vector2i) -> int:
-	return abs(h.q - p.x) + abs(h.r - p.y)

@@ -2,45 +2,33 @@ extends Node
 
 const TILE_SIZE := 1.0
 const TILE_HEIGHT := 0.125
+const MAX_HEIGHT := 5
+const MAX_DEPT := -5
+const SMOOTH := 5
 
 var grid_size := {
-	x = 200,
-	y = 100
+	q = 200,
+	r = 100
 }
-var map : Array[Array]
-var map_seed
 
-func _init():
-	map_seed = hash("Godot")
+func normalize(coord):
+	if coord.r < 0:
+		return null
+	if coord.r >= grid_size.r:
+		return null
+	return { q = int(coord.q + grid_size.q) % grid_size.q, r = coord.r}
 
-func oddq_to_cube(hex):
-	var parity = hex.x&1
-	var q = hex.x
-	var r = hex.y - (hex.x - parity) / 2
-	return {q = q, r = r, s = -q-r}
+func hex_add(h:Hex, vec:Vector2i):
+	return normalize({q = h.q + vec.x, r = h.r + vec.y})
+	
+func hex_distance(h:Hex, p:Vector2i) -> int:
+	return min(abs(h.q - p.x), abs(h.q + grid_size.q - p.x)) + abs(h.r - p.y)
 
-func cube_to_oddq(cube):
-	var parity = int(cube.q)&1
-	var col = cube.q
-	var row = cube.r + (cube.q - parity) / 2
-	return normalize({x = col, y = row})
-
-func cube_add(cube, vec):
-	return {q = cube.q + vec.q, r = cube.r + vec.r, s =  cube.s + vec.s}
-
-func cube_subtract(a, b):
-	return {q = a.q-b.q, r = a.r-b.r, s = a.s - b.s}
-
-func cube_distance(a, b):
-	var vec = cube_subtract(a, b)
-	return (abs(vec.q) + abs(vec.r) + abs(vec.s)) / 2
-
-func cubes_in_radius(center, radius):
+func hexes_in_radius(center:Hex, radius:int):
 	var results = []
 	for  q in range(-radius, radius):
 		for r in range(max(-radius, -q-radius), min(+radius, -q+radius)):
-			var s = -q-r
-			results.append(cube_add(center, {q = q, r = r, s = s}))
+			results.append(hex_add(center, Vector2i(q, r)))
 	return results
 
 func cube_lerp(a, b, t): # for hexes
@@ -68,15 +56,8 @@ func cube_round(frac):
 	return {q = q, r = r, s = s}
 
 func cube_linedraw(a, b):
-	var N = cube_distance(a, b)
+	var N = hex_distance(a, b)
 	var results = []
 	for i in range (0, N):
 		results.append(cube_round(cube_lerp(a, b, 1.0/N * i)))
 	return results
-
-func normalize(tile):
-	if tile.y < 0:
-		return null
-	if tile.y >= grid_size.y:
-		return null
-	return { x = int(tile.x + grid_size.x) % grid_size.x, y = tile.y}
