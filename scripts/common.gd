@@ -5,6 +5,7 @@ const TILE_HEIGHT := 0.125
 const MAX_HEIGHT := 5
 const MAX_DEPT := -5
 const SMOOTH := 5
+const TECTONIC_PLATES := 10
 
 var grid_size := {
 	q = 200,
