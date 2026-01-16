@@ -5,7 +5,13 @@ const TILE_HEIGHT := 0.125
 const MAX_HEIGHT := 5
 const MAX_DEPT := -5
 const SMOOTH := 5
-const TECTONIC_PLATES := 10
+const TECTONIC_PLATES := 3
+const PLATE_MIN_SIZE := 10
+const PLATE_MAX_SIZE := 50
+const DIRECTIONS = [
+	Vector2i(1, 0), Vector2i(1, -1), Vector2i(0, -1),
+	Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(0, 1)
+]
 
 var grid_size := {
 	q = 200,
@@ -29,7 +35,18 @@ func hexes_in_radius(center:Hex, radius:int):
 	var results = []
 	for  q in range(-radius, radius):
 		for r in range(max(-radius, -q-radius), min(+radius, -q+radius)):
-			results.append(hex_add(center, Vector2i(q, r)))
+			var h = hex_add(center, Vector2i(q, r))
+			if h:
+				results.append(h)
+	return results
+	
+func hexes_in_ring(center: Hex, radius:int):
+	var results = []
+	var hex = hex_add(center, Common.DIRECTIONS[4] * radius)
+	for i in range(0, 5):
+		for j in range(0, radius):
+			results.append(hex)
+			hex = hex_add(hex, Common.DIRECTIONS[i])
 	return results
 
 func cube_lerp(a, b, t): # for hexes
