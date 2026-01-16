@@ -1,23 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqu2qw2hcarf5"]
+[gd_scene load_steps=6 format=3 uid="uid://cqu2qw2hcarf5"]
 
+[ext_resource type="Script" path="res://scenes/WorldView.gd" id="1_vgu80"]
 [ext_resource type="Script" path="res://scripts/ui/GameCamera.gd" id="2_2nin7"]
-[ext_resource type="Script" path="res://scenes/HexTerrain.gd" id="3_3r8dr"]
-[ext_resource type="PackedScene" uid="uid://y3j318roql7u" path="res://scenes/World.tscn" id="3_i1c71"]
+[ext_resource type="Script" path="res://scenes/Prince.gd" id="3_3r8dr"]
 [ext_resource type="PackedScene" uid="uid://1oufbrmw64if" path="res://scenes/HexInfoPanel.tscn" id="4_fa66e"]
+[ext_resource type="PackedScene" uid="uid://np2b31cxcdak" path="res://scenes/WorldView.tscn" id="4_qewan"]
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_vgu80")
 
 [node name="GameCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 12, 0)
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 50, 0)
 script = ExtResource("2_2nin7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
 
-[node name="HexTerrain" type="Node3D" parent="."]
+[node name="Prince" type="Node3D" parent="."]
 script = ExtResource("3_3r8dr")
 
-[node name="World" parent="." instance=ExtResource("3_i1c71")]
+[node name="WorldView" parent="Prince" instance=ExtResource("4_qewan")]
 
 [node name="Ui" type="CanvasLayer" parent="."]
 
