@@ -5,3 +5,4 @@
 [node name="SeaTile" type="Node3D"]
 
 [node name="hex_water" parent="." instance=ExtResource("1_1i5bc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
