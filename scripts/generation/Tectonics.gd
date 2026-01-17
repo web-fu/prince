@@ -7,4 +7,4 @@ static func compute_stress(grid:HexGrid, plates:Array):
 				var p1 = plates[hex.plate_id]
 				var p2 = plates[n.plate_id]
 				var delta = p1.movement - p2.movement
-				hex.stress += delta.length()
+				hex.stress += delta.length() * Common.MAX_HEIGHT

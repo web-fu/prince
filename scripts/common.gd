@@ -3,14 +3,18 @@ extends Node
 const TILE_SIZE := 1.0
 const TILE_HEIGHT := 0.5
 const MAX_HEIGHT := 5
-const MAX_DEPT := -5
+const MAX_DEPTH := -2
 const SMOOTH := 5
-const TECTONIC_PLATES := 3
-const PLATE_MIN_SIZE := 10
-const PLATE_MAX_SIZE := 50
+const TECTONIC_PLATES := 15
+const PLATE_MIN_SIZE := 500
+const PLATE_MAX_SIZE := 2500
 const DIRECTIONS = [
-	Vector2i(1, 0), Vector2i(1, -1), Vector2i(0, -1),
-	Vector2i(-1, 0), Vector2i(-1, 1), Vector2i(0, 1)
+	Vector2i(0, -1),	# N
+	Vector2i(1, 0),		# NE
+	Vector2i(1, 1),		# SE
+	Vector2i(0, 1),		# S 
+	Vector2i(-1, 1),	# SW 
+	Vector2i(-1, 0)		# NW
 ]
 
 var grid_size := {
@@ -21,15 +25,15 @@ var grid_size := {
 func normalize(coord):
 	if coord.r < 0:
 		return null
-	if coord.r >= grid_size.r:
+	if coord.r >= grid_size.rows:
 		return null
-	return { q = int(coord.q + grid_size.q) % grid_size.q, r = coord.r}
+	return { q = int(coord.q + grid_size.cols) % grid_size.cols, r = coord.r}
 
 func hex_add(h:Hex, vec:Vector2i):
 	return normalize({q = h.q + vec.x, r = h.r + vec.y})
 	
 func hex_distance(h:Hex, p:Vector2i) -> int:
-	return min(abs(h.q - p.x), abs(h.q + grid_size.q - p.x)) + abs(h.r - p.y)
+	return min(abs(h.q - p.x), abs(h.q + grid_size.cols - p.x)) + abs(h.r - p.y)
 
 func hexes_in_radius(center:Hex, radius:int):
 	var results = []

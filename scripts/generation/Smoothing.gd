@@ -1,8 +1,9 @@
 class_name Smoothing
 
-static func smooth(grid:HexGrid, iterations:int):
-	for _i in iterations:
+static func smooth(grid:HexGrid):
+	for i in range(1, 5):
 		for hex in grid.hexes.values():
 			for n in grid.neighbors(hex):
-				if abs(hex.elevation - n.elevation) > 1:
-					hex.elevation = n.elevation + sign(hex.elevation - n.elevation)
+				var diff = hex.elevation - n.elevation
+				if abs(diff) > 1:
+					hex.elevation = n.elevation + sign(diff)
