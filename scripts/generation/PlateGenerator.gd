@@ -4,10 +4,10 @@ static func generate(grid:HexGrid, plate_count:int, rng:RandomNumberGenerator) -
 	var plates := []
 
 	# 1. scegli nuclei
-	var keys = grid.hexes.keys()
-	keys.shuffle()
 	for i in plate_count:
-		var pos = keys[i]
+		var q = rng.randi_range(0, Common.grid_size.cols)
+		var r = rng.randi_range(0, Common.grid_size.rows)
+		var pos = Vector2i(q, r)
 		var plate = Plate.new(i, pos, rng)
 		plates.append(plate)
 
