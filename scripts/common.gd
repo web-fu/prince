@@ -1,7 +1,7 @@
 extends Node
 
 const TILE_SIZE := 1.0
-const TILE_HEIGHT := 0.125
+const TILE_HEIGHT := 0.5
 const MAX_HEIGHT := 5
 const MAX_DEPT := -5
 const SMOOTH := 5
@@ -14,8 +14,8 @@ const DIRECTIONS = [
 ]
 
 var grid_size := {
-	q = 200,
-	r = 100
+	cols = 200,
+	rows = 100
 }
 
 func normalize(coord):
@@ -79,3 +79,9 @@ func cube_linedraw(a, b):
 	for i in range (0, N):
 		results.append(cube_round(cube_lerp(a, b, 1.0/N * i)))
 	return results
+
+func oddq_to_axial(hex):
+	var parity = hex.col&1
+	var q = hex.col
+	var r = hex.row - (hex.col - parity) / 2
+	return {q = q, r = r}
