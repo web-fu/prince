@@ -12,12 +12,14 @@ func _process(delta):
 		direction.x += 1
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
-	if position.z > 0:
-		if Input.is_action_pressed("move_top"):
-			direction.z -= 1
-	if position.z < Common.grid_size.r * 3:
-		if Input.is_action_pressed("move_bottom"):
-			direction.z += 1
+	if Input.is_action_pressed("move_down") and position.y > 5:
+		direction.y -=1
+	if Input.is_action_pressed("move_up") and position.y < 100 :
+		direction.y +=1
+	if Input.is_action_pressed("move_top") and position.z > 0:
+		direction.z -= 1
+	if Input.is_action_pressed("move_bottom") and position.z < Common.grid_size.r * 3:
+		direction.z += 1
 	if position.x < - Common.grid_size.q * Common.TILE_SIZE * sqrt(3) / 4:
 		position.x += Common.grid_size.q * Common.TILE_SIZE * sqrt(3)
 		direction.x += Common.grid_size.q * Common.TILE_SIZE * sqrt(3)
