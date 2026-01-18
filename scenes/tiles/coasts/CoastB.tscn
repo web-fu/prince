@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ynp2t24ydme4"]
+
+[ext_resource type="PackedScene" uid="uid://6mp4b8gp20c3" path="res://models/tiles/coasts/hex_coast_B.fbx" id="1_sp1gq"]
+
+[node name="CoastB" type="Node3D"]
+
+[node name="hex_coast_B" parent="." instance=ExtResource("1_sp1gq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

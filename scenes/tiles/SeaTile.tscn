@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dnapjklk1op5u"]
 
-[ext_resource type="PackedScene" uid="uid://c37x118q48c6t" path="res://models/tiles/hex_water.fbx" id="1_1i5bc"]
+[ext_resource type="PackedScene" uid="uid://c37x118q48c6t" path="res://models/tiles/hex_water.fbx" id="1_o7k8c"]
 
 [node name="SeaTile" type="Node3D"]
 
-[node name="hex_water" parent="." instance=ExtResource("1_1i5bc")]
+[node name="hex_water" parent="." instance=ExtResource("1_o7k8c")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

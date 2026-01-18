@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dovnbbgkqfei5"]
 
-[ext_resource type="PackedScene" uid="uid://cmkybirje8i2q" path="res://models/tiles/hex_grass.fbx" id="1_spo46"]
+[ext_resource type="PackedScene" uid="uid://cmkybirje8i2q" path="res://models/tiles/hex_grass.fbx" id="1_2no1j"]
 
 [node name="LandTile" type="Node3D"]
 
-[node name="hex_grass" parent="." instance=ExtResource("1_spo46")]
+[node name="hex_grass" parent="." instance=ExtResource("1_2no1j")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
