@@ -11,7 +11,7 @@ func get_hex(q:int, r:int) -> Hex:
 
 func neighbors(hex:Hex) -> Array:
 	var result := []
-	for d in Common.DIRECTIONS:
+	for d in Common.DIRECTIONS.values():
 		var c = Common.hex_add(hex, d)
 		if c:
 			var n = get_hex(c.q, c.r)

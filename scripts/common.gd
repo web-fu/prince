@@ -8,14 +8,18 @@ const SMOOTH := 5
 const TECTONIC_PLATES := 15
 const PLATE_MIN_SIZE := 500
 const PLATE_MAX_SIZE := 2500
-const DIRECTIONS = [
-	Vector2i(0, -1),	# N
-	Vector2i(1, 0),		# NE
-	Vector2i(1, 1),		# SE
-	Vector2i(0, 1),		# S 
-	Vector2i(-1, 1),	# SW 
-	Vector2i(-1, 0)		# NW
-]
+const MAX_RIVERS := 20
+const MIN_RIVERS_HEIGHT := 3
+const MIN_RIVERS_DISTANCE := 5
+
+const DIRECTIONS = {
+	N = Vector2i(0, -1),
+	NE = Vector2i(1, 0),
+	SE = Vector2i(1, 1),
+	S = Vector2i(0, 1),
+	SW = Vector2i(-1, 1),
+	NW = Vector2i(-1, 0)
+}
 
 var grid_size := {
 	cols = 200,
@@ -46,7 +50,7 @@ func hexes_in_radius(center:Hex, radius:int):
 	
 func hexes_in_ring(center: Hex, radius:int):
 	var results = []
-	var hex = hex_add(center, Common.DIRECTIONS[4] * radius)
+	var hex = hex_add(center, Common.DIRECTIONS.SW * radius)
 	for i in range(0, 5):
 		for j in range(0, radius):
 			results.append(hex)

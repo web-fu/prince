@@ -8,4 +8,6 @@ func _init(id:int, rng:RandomNumberGenerator):
 	rand_movement(rng)
 
 func rand_movement(rng: RandomNumberGenerator):
-	movement = Common.DIRECTIONS[rng.randi_range(0, 5)]
+	var keys = Common.DIRECTIONS.keys()
+	var key = keys[rng.randi_range(0, 5)]
+	movement = Common.DIRECTIONS[key]
