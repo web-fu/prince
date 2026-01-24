@@ -21,4 +21,4 @@ func _unhandled_input(event):
 		var offset = CoordConverter.worldToOffset(position)
 		if offset:
 			var hex = grid.get_hex(offset.col, offset.row)
-			print(hex.data())
+			$TileInfo.show_tile(hex)
