@@ -12,11 +12,11 @@ const AXIAL_DIRECTIONS = [
 static func offsetToAxial(coord: OffsetCoord):
 	var q = coord.col
 	var r = coord.row - (coord.col - (coord.col & 1)) / 2
-	return {q = q, r = r}
+	return AxialCoord.new(q, r)
 
-static func axialToOffset(q: int, r: int):
-	var col = q
-	var row = r + (q - (q & 1)) / 2
+static func axialToOffset(axial: AxialCoord):
+	var col = axial.q
+	var row = axial.r + (axial.q - (axial.q & 1)) / 2
 	return OffsetCoord.new(col, row)
 
 static func roundAxial(q: int, r: int):
@@ -41,10 +41,7 @@ static func roundAxial(q: int, r: int):
 	return { q = rq, r = rr }
 	
 static func axialSum(axial, vector):
-	return {
-		q = axial.q + vector.q,
-		r = axial.r + vector.r
-	}
+	return AxialCoord.new(axial.q + vector.q, axial.r + vector.r)
 
 static func axialDistance(a, b):
 	# Using cubic coordinates formula (more efficient)
@@ -53,21 +50,25 @@ static func axialDistance(a, b):
 
 	return (abs(a.q - b.q) + abs(a.r - b.r) + abs(aS - bS)) / 2
 
-static func getAxialNeighbors(q: int, r: int):
+static func offsetDistance(a: OffsetCoord, b: OffsetCoord):
+	var axialA1 = offsetToAxial(a)
+	var axialA2 = offsetToAxial(OffsetCoord.new(a.col + Common.grid_size.cols, a.row))
+	var axialB = offsetToAxial(b)
+	
+	return min(axialDistance(axialA1, axialB), axialDistance(axialA2, axialB))
+
+static func getAxialNeighbors(axial: AxialCoord):
 	var result = []
 	for dir in AXIAL_DIRECTIONS:
-		result.append({
-			q = q + dir.q,
-			r = r + dir.r
-		}) 
+		result.append(AxialCoord.new(axial.q + dir.q, axial.r + dir.r)) 
 	return result
 
 static func getOffsetNeighbors(coord: OffsetCoord):
 	var axial = offsetToAxial(coord)
-	var neighbors = getAxialNeighbors(axial.q, axial.r)
+	var neighbors = getAxialNeighbors(axial)
 	var result = []
 	for neighbor in neighbors:
-		var neighborCoord = axialToOffset(neighbor.q, neighbor.r)
+		var neighborCoord = axialToOffset(neighbor)
 		neighborCoord = normalize(neighborCoord)
 		if neighborCoord:
 			result.append(neighborCoord)
@@ -79,7 +80,7 @@ static func getCoordsInRadius(coord: OffsetCoord, radius: int):
 	for q in range(-radius, radius):
 		for r in range(max(-radius, -q-radius), min(+radius, -q+radius)):
 			var axialResult = axialSum(axial, {q = q, r = r})
-			var offsetResult = normalize(axialToOffset(axialResult.q, axialResult.r))
+			var offsetResult = normalize(axialToOffset(axialResult))
 			if offsetResult:
 				results.append(offsetResult)
 	return results
