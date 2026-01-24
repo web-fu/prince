@@ -6,8 +6,8 @@ const SEA_TILE = preload("res://scenes/tiles/SeaTile.tscn")
 func draw_world(grid):
 	for col in range(-Common.grid_size.cols, Common.grid_size.cols * 2):
 		for row in range(0, Common.grid_size.rows):
-			var normCol = (col + Common.grid_size.cols) % Common.grid_size.cols
-			var hex = grid.get_hex(normCol, row)
+			var normCoord = CoordConverter.normalize(OffsetCoord.new(col, row))
+			var hex = grid.get_hex(normCoord.col, normCoord.row)
 			var tile = _get_tile(grid, hex)
 			var coord = CoordConverter.offsetToWorld(col, row)
 			coord.y = hex.elevation * Common.TILE_HEIGHT if hex.elevation > 0 else 0

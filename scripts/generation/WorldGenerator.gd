@@ -7,9 +7,9 @@ func generate(seed:int):
 	rng.seed = seed
 
 	# crea griglia
-	for q in range(0, Common.grid_size.cols):
-		for r in range(0, Common.grid_size.rows):
-			grid.add_hex(q, r)
+	for col in range(0, Common.grid_size.cols):
+		for row in range(0, Common.grid_size.rows):
+			grid.add_hex(col, row)
 
 	var plates = PlateGenerator.generate(grid, rng)
 	Tectonics.compute_stress(grid, plates)

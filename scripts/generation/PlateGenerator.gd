@@ -12,13 +12,13 @@ static func generate(grid:HexGrid, rng:RandomNumberGenerator):
 	
 	for i in range(1, Common.TECTONIC_PLATES + 1):
 		plates.append(Plate.new(i, rng))
-		var q = rng.randi_range(0, Common.grid_size.cols)
-		var r = rng.randi_range(0, Common.grid_size.rows)
-		var pos = grid.get_hex(q, r)
+		var col = rng.randi_range(0, Common.grid_size.cols - 1)
+		var row = rng.randi_range(0, Common.grid_size.rows - 1)
+		var pos = grid.get_hex(col, row)
 		var plate = {
 				id = i,
 				frontier = [pos],
-				max_size = rng.randi_range(Common.PLATE_MIN_SIZE, Common.PLATE_MAX_SIZE),
+				max_size = rng.randi_range(Common.PLATE_MIN_SIZE, Common.PLATE_MAX_SIZE - 1),
 				roughness = rng.randf_range(0.3, 0.9)
 			}
 		pos.plate_id = i
@@ -41,8 +41,9 @@ static func _expand_plate(
 
 	while not frontier.is_empty() and size < max_size:
 		var current = frontier.pop_front()
-
-		for neighbor in grid.neighbors(current):
+		var neighborsCoord = CoordConverter.getOffsetNeighbors(current.coord)
+		for neighborCoord in neighborsCoord:
+			var neighbor = grid.get_hex(neighborCoord.col, neighborCoord.row)
 			if not unassigned.has(neighbor):
 				continue
 
