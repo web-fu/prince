@@ -122,7 +122,7 @@ static func normalize(coord: OffsetCoord):
 		return null
 	if coord.row >= Common.grid_size.rows:
 		return null
-	return OffsetCoord.new((coord.col + Common.grid_size.rows) % Common.grid_size.rows, coord.row)
+	return OffsetCoord.new((coord.col + Common.grid_size.cols) % Common.grid_size.cols, coord.row)
 
 
 static func axialToWorld(
