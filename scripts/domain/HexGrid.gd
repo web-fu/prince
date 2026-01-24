@@ -1,10 +1,20 @@
 class_name HexGrid
 
+var cols: int
+var rows: int
+
 var hexes := {} # Dictionary<Vector2i, Hex>
 
-func add_hex(col:int, row:int):
-	var h = Hex.new(col, row)
-	hexes[Vector2i(col, row)] = h
+func _init(cols, rows) -> void:
+	self.cols = cols
+	self.rows = rows
+
+	for col in range(0, cols):
+		for row in range(0, rows):
+			self._addHex(col, row)
+
+func _addHex(col:int, row:int):
+	hexes[Vector2i(col, row)] = Hex.new(col, row)
 
 func get_hex(col:int, row:int) -> Hex:
 	return hexes.get(Vector2i(col, row), null)
