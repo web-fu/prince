@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://gkv5k4rf7pyi"]
+
+[ext_resource type="Texture2D" uid="uid://buwdqydx32opy" path="res://assets/cell-outline.png" id="1_fha00"]
+
+[node name="TileSelected" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 0, 0, 0)
+texture = ExtResource("1_fha00")
