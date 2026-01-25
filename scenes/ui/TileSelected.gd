@@ -27,8 +27,8 @@ func _process(delta: float) -> void:
 		coordNew = self.coord.northWest()
 	
 	if coordNew:
-		self.move(coordNew)
+		self.move(get_parent().grid.get_hex(coordNew))
 
-func move(coord: OffsetCoord):
-	self.coord = coord
-	self.position = CoordConverter.offsetToWorld(coord)
+func move(hex: Hex):
+	self.coord = hex.coord
+	self.position = hex.getWorldPosition()

@@ -9,7 +9,7 @@ func draw_world(grid):
 			var coord = OffsetCoord.new(col, row)
 			var position = CoordConverter.offsetToWorld(coord)
 			var normCoord = CoordConverter.normalize(coord)
-			var hex = grid.get_hex(normCoord.col, normCoord.row)
+			var hex = grid.get_hex(normCoord)
 			var tile = _get_tile(grid, hex)
 			position.y = hex.elevation * Common.TILE_HEIGHT if hex.elevation > 0 else 0
 			tile.position = position

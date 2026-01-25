@@ -16,12 +16,12 @@ func _init(cols, rows) -> void:
 func _addHex(col:int, row:int):
 	hexes[Vector2i(col, row)] = Hex.new(col, row)
 
-func get_hex(col:int, row:int) -> Hex:
-	return hexes.get(Vector2i(col, row), null)
+func get_hex(coord: OffsetCoord) -> Hex:
+	return hexes.get(Vector2i(coord.col, coord.row), null)
 
 func neighbors(hex:Hex) -> Array:
 	var result := []
 	var coords = CoordConverter.getOffsetNeighbors(hex.coord)
 	for coord in coords:
-		result.append(self.get_hex(coord.col, coord.row))
+		result.append(self.get_hex(coord))
 	return result

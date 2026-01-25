@@ -20,6 +20,6 @@ func _unhandled_input(event):
 		var position = from + to * (-from.y / to.y)
 		var offset = CoordConverter.worldToOffset(position)
 		if offset:
-			var hex = grid.get_hex(offset.col, offset.row)
+			var hex = grid.get_hex(offset)
 			$TileInfo.show_tile(hex)
-			$WorldView/TileSelected.move(hex.coord)
+			$TileSelected.move(hex)
