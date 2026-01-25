@@ -22,4 +22,4 @@ func _unhandled_input(event):
 		if offset:
 			var hex = grid.get_hex(offset.col, offset.row)
 			$TileInfo.show_tile(hex)
-			$WorldView/TileSelected.position = CoordConverter.offsetToWorld(hex.coord)
+			$WorldView/TileSelected.move(hex.coord)
