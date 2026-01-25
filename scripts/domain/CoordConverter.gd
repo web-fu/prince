@@ -1,12 +1,12 @@
 class_name CoordConverter
 
 const AXIAL_DIRECTIONS = [
-	{ q = 1, r = 0 },   # East
+	{ q = 0, r = -1 },  # North
 	{ q = 1, r = -1 },  # North East
-	{ q = 0, r = -1 },  # North West
-	{ q = -1, r = 0 },  # West
+	{ q = 1, r = 0 },   # South East
+	{ q = 0, r = 1 },   # South
 	{ q = -1, r = 1 },  # South West
-	{ q = 0, r = 1 },   # South East
+	{ q = -1, r = 0 },  # North West
 ]
 
 static func offsetToAxial(coord: OffsetCoord):
