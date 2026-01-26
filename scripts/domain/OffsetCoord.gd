@@ -10,29 +10,29 @@ func _init(col, row) -> void:
 func north():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialNorth = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[0])
-	return CoordConverter.normalize(CoordConverter.axialToOffset(axialNorth))
+	return CoordConverter.axialToOffset(axialNorth)
 	
 func northEast():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialNorthEast = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[1])
-	return CoordConverter.normalize(CoordConverter.axialToOffset(axialNorthEast))
+	return CoordConverter.axialToOffset(axialNorthEast)
 	
 func southEast():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialSouthEast = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[2])
-	return CoordConverter.normalize(CoordConverter.axialToOffset(axialSouthEast))
+	return CoordConverter.axialToOffset(axialSouthEast)
 	
 func south():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialSouth = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[3])
-	return CoordConverter.normalize(CoordConverter.axialToOffset(axialSouth))
+	return CoordConverter.axialToOffset(axialSouth)
 	
 func southWest():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialSouthWest = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[4])
-	return CoordConverter.normalize(CoordConverter.axialToOffset(axialSouthWest))
+	return CoordConverter.axialToOffset(axialSouthWest)
 	
 func northWest():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialNorthWest = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[5])
-	return CoordConverter.normalize(CoordConverter.axialToOffset(axialNorthWest))
+	return CoordConverter.axialToOffset(axialNorthWest)

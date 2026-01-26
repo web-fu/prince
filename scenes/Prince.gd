@@ -19,7 +19,5 @@ func _unhandled_input(event):
 		var to = from + camera.project_ray_normal(mouse_pos) * ray_length
 		var position = from + to * (-from.y / to.y)
 		var offset = CoordConverter.worldToOffset(position)
-		if offset:
-			var hex = grid.get_hex(offset)
-			$TileInfo.show_tile(hex)
-			$TileSelected.move(hex)
+		
+		$TileSelected.move(offset)

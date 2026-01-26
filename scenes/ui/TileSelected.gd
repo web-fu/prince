@@ -10,7 +10,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var coordNew: OffsetCoord
+	var coordNew = self.coord
 	if ! is_selected:
 		return
 	if Input.is_action_just_released("axial_move_north"):
@@ -26,9 +26,13 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("axial_move_north_west"):
 		coordNew = self.coord.northWest()
 	
-	if coordNew:
-		self.move(get_parent().grid.get_hex(coordNew))
+	self.move(coordNew)
 
-func move(hex: Hex):
-	self.coord = hex.coord
-	self.position = hex.getWorldPosition()
+func move(coord: OffsetCoord):
+	var coordNorm = CoordConverter.normalize(coord)
+	if coordNorm:
+		var hex = get_parent().grid.get_hex(coordNorm)
+		self.position = CoordConverter.offsetToWorld(coord)
+		self.position.y = hex.getWorldPosition().y
+		self.coord = coord
+		$TileInfo.show_tile(hex)

@@ -9,12 +9,12 @@ const AXIAL_DIRECTIONS = [
 	{ q = -1, r = 0 },  # North West
 ]
 
-static func offsetToAxial(coord: OffsetCoord):
+static func offsetToAxial(coord: OffsetCoord) -> AxialCoord:
 	var q = coord.col
 	var r = coord.row - (coord.col - (coord.col & 1)) / 2
 	return AxialCoord.new(q, r)
 
-static func axialToOffset(axial: AxialCoord):
+static func axialToOffset(axial: AxialCoord) -> OffsetCoord:
 	var col = axial.q
 	var row = axial.r + (axial.q - (axial.q & 1)) / 2
 	return OffsetCoord.new(col, row)
@@ -85,7 +85,7 @@ static func getCoordsInRadius(coord: OffsetCoord, radius: int):
 				results.append(offsetResult)
 	return results
 
-static func offsetToWorld(coord: OffsetCoord):
+static func offsetToWorld(coord: OffsetCoord) -> Vector3:
 	var scale = Common.TILE_SIZE
 	var r_inner = 1.0 # inner radius in model
 	var R = 2 / sqrt(3) # outer radius in model (~1.1547)
@@ -101,7 +101,7 @@ static func offsetToWorld(coord: OffsetCoord):
 	return Vector3(worldX, 0, worldZ)
 
 
-static func worldToOffset(world: Vector3):
+static func worldToOffset(world: Vector3) -> OffsetCoord:
 	var scale = Common.TILE_SIZE
 	var r_inner = 1.0
 	var R = 2 / sqrt(3)
@@ -112,7 +112,7 @@ static func worldToOffset(world: Vector3):
 	var col = int(round(world.x / spacingX))
 	var row = int(round((world.z - (col % 2) * offsetZ) / spacingZ))
 	
-	return normalize(OffsetCoord.new(col, row))
+	return OffsetCoord.new(col, row)
 
 static func normalize(coord: OffsetCoord):
 	if coord.row < 0:
