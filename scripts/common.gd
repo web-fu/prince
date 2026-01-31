@@ -6,8 +6,8 @@ const MAX_HEIGHT := 5
 const MAX_DEPTH := -2
 const SMOOTH := 5
 const TECTONIC_PLATES := 15
-const PLATE_MIN_SIZE := 500
-const PLATE_MAX_SIZE := 2500
+const PLATE_MIN_SIZE := 50
+const PLATE_MAX_SIZE := 100
 const MAX_RIVERS := 20
 const MIN_RIVERS_HEIGHT := 3
 const MIN_RIVERS_DISTANCE := 5
@@ -22,8 +22,8 @@ const DIRECTIONS = {
 }
 
 var grid_size := {
-	cols = 200,
-	rows = 100
+	cols = 100,
+	rows = 50
 }
 
 func normalize(coord):
@@ -39,15 +39,7 @@ func hex_add(h:Hex, vec:Vector2i):
 func hex_distance(h:Hex, p:Vector2i) -> int:
 	return min(abs(h.q - p.x), abs(h.q + grid_size.cols - p.x)) + abs(h.r - p.y)
 
-func hexes_in_radius(center:Hex, radius:int):
-	var results = []
-	for  q in range(-radius, radius):
-		for r in range(max(-radius, -q-radius), min(+radius, -q+radius)):
-			var h = hex_add(center, Vector2i(q, r))
-			if h:
-				results.append(h)
-	return results
-	
+
 func hexes_in_ring(center: Hex, radius:int):
 	var results = []
 	var hex = hex_add(center, Common.DIRECTIONS.SW * radius)
@@ -87,9 +79,3 @@ func cube_linedraw(a, b):
 	for i in range (0, N):
 		results.append(cube_round(cube_lerp(a, b, 1.0/N * i)))
 	return results
-
-func oddq_to_axial(hex):
-	var parity = hex.col&1
-	var q = hex.col
-	var r = hex.row - (hex.col - parity) / 2
-	return {q = q, r = r}
