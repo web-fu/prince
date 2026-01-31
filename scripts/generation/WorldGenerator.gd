@@ -8,6 +8,7 @@ func generate(seed:int):
 	var plates = PlateGenerator.generate(grid, rng)
 	Tectonics.compute_stress(grid, plates)
 	ElevationGenerator.apply(grid)
+	RiverGenerator.generate_rivers(grid, rng)
 	Smoothing.smooth(grid)
 
 	return grid
