@@ -1,7 +1,10 @@
 extends Node3D
 
+@onready var game_camera: Camera3D = $"../GameCamera"
+
 var coord := OffsetCoord.new(0, 0)
 var is_selected := true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,7 +29,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("axial_move_north_west"):
 		coordNew = self.coord.northWest()
 	
-	self.move(coordNew)
+	if coord != coordNew:
+		self.move(coordNew)
 
 func move(coord: OffsetCoord):
 	var coordNorm = CoordConverter.normalize(coord)
@@ -36,3 +40,4 @@ func move(coord: OffsetCoord):
 		self.position.y = hex.getWorldPosition().y
 		self.coord = coord
 		$TileInfo.show_tile(hex)
+		game_camera.adjust(self.position)
