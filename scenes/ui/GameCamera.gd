@@ -6,14 +6,9 @@ extends Camera3D
 
 const AXIS_Z_LOCK = 25
 
-var deadzone_ratio = 0.9
-
-var direction = position
-
-var check
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var direction = position
 	if Input.is_action_pressed("camera_move_right"):
 		direction.x += 1
 	if Input.is_action_pressed("camera_move_left"):
@@ -36,9 +31,6 @@ func _process(delta):
 		position.x -= Common.grid_size.cols * Common.TILE_SIZE * sqrt(3)
 		direction.x -= Common.grid_size.cols * Common.TILE_SIZE * sqrt(3)
 	position = lerp(position, direction, camera_speed)
-	
-	var p = get_camera_ground_point()
-	DebugDraw3D.draw_sphere(p, 0.3, Color.RED)
 
 func get_camera_ground_point() -> Vector3:
 	var origin = global_position
@@ -53,29 +45,10 @@ func get_camera_ground_point() -> Vector3:
 
 	return origin + direction * t
 
-func move_camera_to_ground_point_smooth(ground_point: Vector3):
-	var direction = -global_transform.basis.z.normalized()
-	
-	print(direction)
-	
-	if abs(direction.y) < 0.0001:
-		return
-
-	var t = -global_position.y / direction.y
-	var desired_pos = ground_point - direction * t
-	
-	print(desired_pos)
-	#global_position = desired_pos
-
-
 func adjust(elementPosition: Vector3):
 	var cameraPosition = get_camera_ground_point()
 	var diffPosition = cameraPosition - elementPosition
+	diffPosition.y = 0
 	
-	print('...')
-	print(cameraPosition)
-	print(elementPosition)
-	print(diffPosition)
-	
-	#if abs(diffPosition.x) > 10 || abs(diffPosition.z) > 10:
-	move_camera_to_ground_point_smooth(elementPosition)
+	if abs(diffPosition.x) > 10 || abs(diffPosition.z) > 8:
+		position = lerp(position, position - diffPosition, camera_speed)
