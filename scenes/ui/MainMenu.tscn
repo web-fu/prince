@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0my4gipruuyw"]
+[gd_scene load_steps=8 format=3 uid="uid://b0my4gipruuyw"]
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_dco21"]
 [ext_resource type="Texture2D" uid="uid://b1jyeocl4m3r4" path="res://assets/background.jpg" id="2_bgo7k"]
@@ -7,16 +7,26 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_35s63"]
 texture = ExtResource("2_bgo7k")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x43gr"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtfq4"]
-bg_color = Color(0.637843, 0.637843, 0.637843, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqtmo"]
-bg_color = Color(0.266575, 0.266575, 0.266575, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1nr3"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.231373)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdx5w"]
+bg_color = Color(0.678431, 0.678431, 0.678431, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_color = Color(0, 0, 0, 0.231373)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t55l"]
+bg_color = Color(0.351563, 0.351563, 0.351563, 1)
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
@@ -80,9 +90,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_x43gr")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wtfq4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_iqtmo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_f1nr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fdx5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6t55l")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1nr3")
 text = "Start Game"
 
@@ -94,9 +104,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_x43gr")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wtfq4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_iqtmo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_f1nr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fdx5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6t55l")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1nr3")
 text = "Load Game"
 
@@ -108,9 +118,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_x43gr")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wtfq4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_iqtmo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_f1nr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fdx5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6t55l")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1nr3")
 text = "Options"
 
@@ -122,9 +132,9 @@ theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_x43gr")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wtfq4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_iqtmo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_f1nr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fdx5w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6t55l")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1nr3")
 text = "Exit
 "
