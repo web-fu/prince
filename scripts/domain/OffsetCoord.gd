@@ -36,3 +36,12 @@ func northWest():
 	var axial = CoordConverter.offsetToAxial(self)
 	var axialNorthWest = CoordConverter.axialSum(axial, CoordConverter.AXIAL_DIRECTIONS[5])
 	return CoordConverter.axialToOffset(axialNorthWest)
+
+func getDirection(coord: OffsetCoord):
+	var axial = CoordConverter.offsetToAxial(self)
+	var axialTo = CoordConverter.offsetToAxial(coord)
+	var axialDiff = {
+		q = axialTo.q - axial.q, 
+		r = axialTo.r - axial.r 
+	}
+	return CoordConverter.AXIAL_DIRECTIONS.find(axialDiff)

@@ -16,4 +16,7 @@ func show_tile(hex: Hex):
 	visible = true
 	title.text = "Tile " + str(hex.coord.col) + ", " + str(hex.coord.row)
 	elevation.text = "Elevation: " + str(hex.elevation)
-	river.text = "River: " + str(hex.has_river)
+	if hex.has_river:
+		river.text = "River In:" + str(hex.river.rotationIn) + " Out " + str(hex.river.rotationOut)
+	else:
+		river.text = ""

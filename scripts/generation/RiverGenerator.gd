@@ -15,30 +15,20 @@ static func generate_rivers(
 		var source = candidates[rng.randi_range(0, candidates.size() - 1)]
 		var river = _generate_single_river(grid, source, rng)
 		
-		for hex in river:
-			hex.has_river = true
-			#print(i, ": ", hex.data())
-		
 		rivers.append(river)
 
 	return rivers
 
 static func _generate_single_river(
 	grid,
-	source_hex,
+	source,
 	rng: RandomNumberGenerator
 ) -> Array:
-
 	var path := []
-	var current = source_hex
+	var current = source
+	path.append(source)
 
 	while true:
-		path.append(current)
-
-		# Se arriva al mare
-		if current.elevation <= 0:
-			break
-
 		# Se bacino chiuso
 		var candidates := []
 
@@ -51,10 +41,18 @@ static func _generate_single_river(
 		if candidates.is_empty():
 			break   # lago / bacino chiuso
 
-		# scegli il più basso (con rumore)
-		candidates.sort_custom(func(a, b):
-			return (a.elevation + rng.randf_range(-0.2, 0.2)) < (b.elevation + rng.randf_range(-0.2, 0.2)))
-
-		current = candidates[0]
-
+		var next = candidates[rng.randi_range(0, candidates.size() - 1)]
+		var direction = current.coord.getDirection(next.coord)
+		current.has_river = true
+		current.river.rotationOut = direction * 60
+		next.river.rotationIn = (direction + 3) % 6  * 60
+		print(current.data(), " ", direction, " ", current.river.rotationIn, " ", current.river.rotationOut)
+		
+		if next.elevation < 0 :
+			break
+		
+		path.append(next)
+		
+		current = next
+	
 	return path

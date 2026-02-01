@@ -5,9 +5,11 @@ var plate_id:int = 0
 var elevation:int = Common.MAX_DEPTH
 var stress:float = 0.0
 var has_river:bool
+var river: River
 
 func _init(col:int, row:int):
 	self.coord = OffsetCoord.new(col, row)
+	self.river = River.new(0, 180)
 
 func getWorldPosition() -> Vector3: 
 	var position = CoordConverter.offsetToWorld(coord)
