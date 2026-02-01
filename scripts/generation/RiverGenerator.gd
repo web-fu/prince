@@ -46,7 +46,6 @@ static func _generate_single_river(
 		current.has_river = true
 		current.river.rotationOut = direction * 60
 		next.river.rotationIn = (direction + 3) % 6  * 60
-		print(current.data(), " ", direction, " ", current.river.rotationIn, " ", current.river.rotationOut)
 		
 		if next.elevation < 0 :
 			break
