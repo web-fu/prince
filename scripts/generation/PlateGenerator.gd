@@ -8,8 +8,8 @@ static func generate(grid:HexGrid, rng:RandomNumberGenerator):
 	
 	for i in range(1, Common.TECTONIC_PLATES + 1):
 		plates.append(Plate.new(i, rng))
-		var col = rng.randi_range(0, Common.grid_size.cols - 1)
-		var row = rng.randi_range(0, Common.grid_size.rows - 1)
+		var col = rng.randi_range(0, grid.cols - 1)
+		var row = rng.randi_range(0, grid.rows - 1)
 		var pos = grid.get_hex(OffsetCoord.new(col, row))
 		var plate = {
 				id = i,

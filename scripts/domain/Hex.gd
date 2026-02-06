@@ -6,6 +6,11 @@ var elevation:int = Common.MAX_DEPTH
 var stress:float = 0.0
 var has_river:bool
 var river: River
+var latitude: float
+var longitude: float
+var baseTemp: float
+var humidity: float
+var windDirection: float
 
 func _init(col:int, row:int):
 	self.coord = OffsetCoord.new(col, row)

@@ -9,6 +9,7 @@ func generate(seed:int):
 	Tectonics.compute_stress(grid, plates)
 	ElevationGenerator.apply(grid)
 	Smoothing.smooth(grid)
+	ClimateGenerator.generate(grid, rng)
 	RiverGenerator.generate_rivers(grid, rng)
 
 	return grid

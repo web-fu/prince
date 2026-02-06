@@ -8,7 +8,7 @@ static func generate_rivers(
 	var candidates := []
 	
 	for candidate in grid.hexes.values():
-		if candidate.elevation >= Common.MIN_RIVERS_HEIGHT:
+		if candidate.elevation >= Common.MIN_RIVERS_HEIGHT and candidate.humidity > 30:
 			candidates.append(candidate)
 	
 	for i in range(1, Common.MAX_RIVERS):

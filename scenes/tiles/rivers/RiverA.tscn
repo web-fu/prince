@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://8yq3oij7s108"]
+
+[ext_resource type="PackedScene" uid="uid://tixbxldc58ec" path="res://models/tiles/rivers/hex_river_A.fbx" id="1_0vee3"]
+
+[node name="RiverA" type="Node3D"]
+
+[node name="hex_river_A" parent="." instance=ExtResource("1_0vee3")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, 0, 0)

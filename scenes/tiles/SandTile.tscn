@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2mj5426fb4kj"]
+
+[ext_resource type="PackedScene" uid="uid://be4kpw4nrlwxt" path="res://models/tiles/hex_sand.gltf.glb" id="1_pe0b8"]
+
+[node name="SandTile" type="Node3D"]
+
+[node name="hex_sand_gltf" parent="." instance=ExtResource("1_pe0b8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1, 0)

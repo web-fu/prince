@@ -5,10 +5,12 @@ const SEA_TILE = preload("res://scenes/tiles/SeaTile.tscn")
 const RIVER_A = preload("res://scenes/tiles/rivers/RiverA.tscn")
 const RIVER_B = preload("res://scenes/tiles/rivers/RiverB.tscn")
 const RIVER_C = preload("res://scenes/tiles/rivers/RiverC.tscn")
+const WET_TILE = preload("res://scenes/tiles/WetTile.tscn")
+const SAND_TILE = preload("res://scenes/tiles/SandTile.tscn")
 
-func draw_world(grid):
-	for col in range(-Common.grid_size.cols, Common.grid_size.cols * 2):
-		for row in range(0, Common.grid_size.rows):
+func draw_world(grid: HexGrid):
+	for col in range(-grid.cols, grid.cols * 2):
+		for row in range(0, grid.rows):
 			var coord = OffsetCoord.new(col, row)
 			var position = CoordConverter.offsetToWorld(coord)
 			var normCoord = CoordConverter.normalize(coord)
@@ -23,6 +25,10 @@ func _get_tile(grid: HexGrid, hex:Hex):
 		return SEA_TILE.instantiate()
 	
 	if !hex.has_river:
+		if hex.humidity < 30:
+			return SAND_TILE.instantiate()
+		if hex.humidity > 60:
+			return WET_TILE.instantiate()
 		return LAND_TILE.instantiate()
 	
 	var riverDiff = hex.river.rotationOut - hex.river.rotationIn
