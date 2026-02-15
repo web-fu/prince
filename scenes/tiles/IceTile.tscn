@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7dq0v57otcnf"]
+
+[ext_resource type="PackedScene" uid="uid://cp4wc6so52xdl" path="res://models/tiles/hex_ice.fbx" id="1_1uxoq"]
+
+[node name="IceTile" type="Node3D"]
+
+[node name="hex_ice" parent="." instance=ExtResource("1_1uxoq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

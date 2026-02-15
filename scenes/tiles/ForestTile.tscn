@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbn0ldabo6qcs"]
+
+[ext_resource type="PackedScene" uid="uid://dskhuiolx0jc8" path="res://models/tiles/hex_forest.fbx" id="1_8yxpo"]
+
+[node name="ForestTile" type="Node3D"]
+
+[node name="hex_forest" parent="." instance=ExtResource("1_8yxpo")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

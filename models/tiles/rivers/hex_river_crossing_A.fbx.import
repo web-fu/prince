@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kkd3ojm1u2dk"
-path="res://.godot/imported/hex_forest.gltf.glb-8d3df2a654d9a14a540ded9a2601ebaa.scn"
+uid="uid://c3rgqvqp57khu"
+path="res://.godot/imported/hex_river_crossing_A.fbx-87a1e68e6791960a774926ff3ccf71d3.scn"
 
 [deps]
 
-source_file="res://models/tiles/hex_forest.gltf.glb"
-dest_files=["res://.godot/imported/hex_forest.gltf.glb-8d3df2a654d9a14a540ded9a2601ebaa.scn"]
+source_file="res://models/tiles/rivers/hex_river_crossing_A.fbx"
+dest_files=["res://.godot/imported/hex_river_crossing_A.fbx-87a1e68e6791960a774926ff3ccf71d3.scn"]
 
 [params]
 
@@ -27,10 +27,11 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=false
+animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={}
-gltf/naming_version=1
-gltf/embedded_image_handling=1
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1

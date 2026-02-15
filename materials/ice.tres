@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dmddnp7vla01u"]
+
+[ext_resource type="Texture2D" uid="uid://cvbml4ubsd6qj" path="res://models/tiles/hexagons_medieval.png" id="1_ifyg5"]
+
+[resource]
+resource_name = "hexagons_medieval"
+albedo_texture = ExtResource("1_ifyg5")
+roughness = 0.5
+uv1_offset = Vector3(12, 0, 0)

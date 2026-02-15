@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dtayjq38gftov"]
+
+[ext_resource type="Texture2D" uid="uid://cvbml4ubsd6qj" path="res://models/tiles/hexagons_medieval.png" id="1_k8ekn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okqkr"]
+atlas = ExtResource("1_k8ekn")
+region = Rect2(512, 256, 128, 256)
+
+[resource]
+albedo_texture = SubResource("AtlasTexture_okqkr")
+uv2_offset = Vector3(0.5, 0.5, 0)
+texture_filter = 0

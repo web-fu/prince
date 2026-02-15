@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4yyti4l4lwt"]
-
-[ext_resource type="PackedScene" uid="uid://kkd3ojm1u2dk" path="res://models/tiles/hex_forest.gltf.glb" id="1_lexla"]
-
-[node name="WetTile" type="Node3D"]
-
-[node name="hex_forest_gltf" parent="." instance=ExtResource("1_lexla")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1, 0)
