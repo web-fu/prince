@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx6bx1xr6jp8u"]
+[gd_scene load_steps=9 format=3 uid="uid://bx6bx1xr6jp8u"]
 
 [ext_resource type="Script" path="res://scenes/Prince.gd" id="1_53cng"]
 [ext_resource type="PackedScene" uid="uid://np2b31cxcdak" path="res://scenes/WorldView.tscn" id="2_aekfh"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://scenes/ui/tile_info.gd" id="4_30ta2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x8ehp"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_w2imv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tt8ca"]
 
 [node name="Prince" type="Node3D"]
 script = ExtResource("1_53cng")
@@ -75,3 +79,19 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_w2imv")
+surface_material_override/0 = SubResource("StandardMaterial3D_tt8ca")
+
+[node name="MinimapCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 100, 0)
