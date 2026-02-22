@@ -35,7 +35,7 @@ func draw_world(grid: HexGrid):
 			var normCoord = CoordConverter.normalize(coord)
 			var hex = grid.get_hex(normCoord)
 			var tile = _get_tile(grid, hex)
-			position.y = hex.elevation * Common.TILE_HEIGHT if hex.elevation > 0 else 0
+			position.y = hex.getWorldPosition().y
 			tile.position = position
 			add_child(tile)
 	

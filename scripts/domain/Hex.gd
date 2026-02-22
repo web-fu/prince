@@ -18,7 +18,7 @@ func _init(col:int, row:int):
 
 func getWorldPosition() -> Vector3: 
 	var position = CoordConverter.offsetToWorld(coord)
-	position.y = self.elevation * Common.TILE_HEIGHT if self.elevation > 0 else 0
+	position.y = self.elevation * Common.TILE_HEIGHT if self.elevation >= 0 else - Common.TILE_HEIGHT
 	return position
 
 func data():
