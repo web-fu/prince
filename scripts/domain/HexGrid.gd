@@ -3,7 +3,7 @@ class_name HexGrid
 var cols: int
 var rows: int
 var axis_tilt := 23.0 # DO NOT PUT 0!
-var temp_min := -20.0
+var temp_min := -10.0
 var temp_max := 40.0
 
 var hexes := {} # Dictionary<Vector2i, Hex>
@@ -21,15 +21,6 @@ func _addHex(col:int, row:int):
 	hex.latitude = (0.5 - float(row) / float(rows)) * 180.0
 	hex.longitude = float(col if col < cols / 2 else col - cols) / cols * 180.0
 	hex.baseTemp = (cos(deg_to_rad(abs(hex.latitude) - axis_tilt)) + cos(deg_to_rad(abs(hex.latitude) + axis_tilt))) / 2 * (temp_max - temp_min) + temp_min
-	if abs(hex.latitude) < axis_tilt:
-		hex.windDirection = - lerp_angle(deg_to_rad(180), deg_to_rad(90), abs(hex.latitude) / axis_tilt)
-		if sign(hex.latitude):
-			hex.windDirection *= sign(hex.latitude)
-	if abs(hex.latitude) >= axis_tilt and abs(hex.latitude) < 90 - axis_tilt:
-		hex.windDirection = lerp_angle(deg_to_rad(90), deg_to_rad(0), (abs(hex.latitude) - axis_tilt) / (90 - axis_tilt * 2) ) * sign(hex.latitude)
-	if abs(hex.latitude) >= 90 - axis_tilt:
-		hex.windDirection = lerp_angle(deg_to_rad(0), deg_to_rad(270), (abs(hex.latitude) + axis_tilt - 90) / axis_tilt) * sign(hex.latitude)
-	hex.windDirection = int(round(rad_to_deg(hex.windDirection) + 360)) % 360
 	
 	hexes[Vector2i(col, row)] = hex
 
@@ -42,3 +33,12 @@ func neighbors(hex:Hex) -> Array:
 	for coord in coords:
 		result.append(self.get_hex(coord))
 	return result
+
+func rand_points(n: int, rng: RandomNumberGenerator):
+	var hexes = []
+	for i in range(n):
+		var col = rng.randi_range(0, self.cols - 1)
+		var row = rng.randi_range(0, self.rows - 1)
+		var hex = self.get_hex(OffsetCoord.new(col, row))
+		hexes.append(hex)
+	return hexes

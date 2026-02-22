@@ -23,4 +23,4 @@ func show_tile(hex: Hex):
 	else:
 		river.text = ""
 	coordinates.text = "Latitude: " + str(hex.latitude) + '°\nLongitude:' + str(hex.longitude) +'°'
-	climate.text = "Temp " + str(snapped(hex.baseTemp, 0.1)) + "° C\nWind: " + str(hex.windDirection) + '°\nHumidity: ' + str(hex.humidity)
+	climate.text = "Temp " + str(snapped(hex.baseTemp, 0.1)) + "° C\n °\nHumidity: " + str(hex.humidity) + '%'
