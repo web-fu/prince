@@ -1,9 +1,13 @@
 class_name Smoothing
 
 static func smooth(grid:HexGrid):
-	for i in range(1, 5):
+	var max_delta = 1
+	for h_max in range(Common.MAX_HEIGHT, Common.MAX_DEPTH, -1):
 		for hex in grid.hexes.values():
 			for n in grid.neighbors(hex):
 				var diff = hex.elevation - n.elevation
-				if abs(diff) > 1:
-					hex.elevation = n.elevation + sign(diff)
+				if abs(diff) > max_delta:
+					if hex.elevation >= h_max: 
+						n.elevation += sign(diff) * (abs(diff) -1)
+					else:
+						hex.elevation -= sign(diff) * (abs(diff) -1)
