@@ -6,11 +6,10 @@ const MAX_HEIGHT := 5
 const MAX_DEPTH := -2
 const SMOOTH := 5
 const TECTONIC_PLATES := 15
-const PLATE_MIN_SIZE := 50
-const PLATE_MAX_SIZE := 100
-const MAX_RIVERS := 20
-const MIN_RIVERS_HEIGHT := 3
-const MIN_RIVERS_DISTANCE := 5
+const LAND_PERCENTAGE := 50.0
+const RIVERS_MAX := 10
+const RIVERS_MIN_HEIGHT := 2
+const RIVERS_MIN_DISTANCE := 15
 
 var grid_size := {
 	cols = 100,
