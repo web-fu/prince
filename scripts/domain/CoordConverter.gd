@@ -40,8 +40,11 @@ static func roundAxial(q: int, r: int):
 
 	return { q = rq, r = rr }
 	
-static func axialSum(axial, vector):
+static func axialSum(axial: AxialCoord, vector):
 	return AxialCoord.new(axial.q + vector.q, axial.r + vector.r)
+	
+static func axialDiff(a: AxialCoord, b: AxialCoord):
+	return AxialCoord.new(a.q - b.q, a.r - b.r)
 
 static func axialDistance(a, b):
 	# Using cubic coordinates formula (more efficient)
@@ -53,9 +56,10 @@ static func axialDistance(a, b):
 static func offsetDistance(a: OffsetCoord, b: OffsetCoord):
 	var axialA1 = offsetToAxial(a)
 	var axialA2 = offsetToAxial(OffsetCoord.new(a.col + Common.grid_size.cols, a.row))
+	var axialA3 = offsetToAxial(OffsetCoord.new(a.col - Common.grid_size.cols, a.row))
 	var axialB = offsetToAxial(b)
 	
-	return min(axialDistance(axialA1, axialB), axialDistance(axialA2, axialB))
+	return min(axialDistance(axialA1, axialB), axialDistance(axialA2, axialB), axialDistance(axialA3, axialB))
 
 static func getAxialNeighbors(axial: AxialCoord):
 	var result = []
