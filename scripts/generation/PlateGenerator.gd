@@ -2,57 +2,62 @@ class_name PlateGenerator
 
 static func generate(grid:HexGrid, rng:RandomNumberGenerator):
 	var plates := []
-	var unassigned := grid.hexes.values()
 	
-	plates.append(Plate.new(0, rng)) 
-	
-	for i in range(1, Common.TECTONIC_PLATES + 1):
-		plates.append(Plate.new(i, rng))
+	for i in range(Common.TECTONIC_PLATES):
 		var col = rng.randi_range(0, grid.cols - 1)
 		var row = rng.randi_range(0, grid.rows - 1)
-		var pos = grid.get_hex(OffsetCoord.new(col, row))
-		var plate = {
-				id = i,
-				frontier = [pos],
-				max_size = rng.randi_range(Common.PLATE_MIN_SIZE, Common.PLATE_MAX_SIZE - 1),
-				roughness = rng.randf_range(0.3, 0.9)
-			}
-		pos.plate_id = i
-		_expand_plate(grid, plate, unassigned, rng)
+		var hex = grid.get_hex(OffsetCoord.new(col, row))
+		var plate = Plate.new(i)
+		plate.coord = OffsetCoord.new(col, row)
+		plates.append(plate)
+		hex.plate_id = i
 	
-	return plates
+	for hex in grid.hexes.values():
+		var closest = plates[0]
+		var best_dist := INF
 
-static func _expand_plate(
+		for plate in plates:
+			var d = CoordConverter.offsetDistance(hex.coord, plate.coord)
+			if d < best_dist:
+				best_dist = d
+				closest = plate
+		
+		hex.plate_id = closest.id
+		plates[closest.id].add_hex(hex)
+
+	for plate in plates:
+		_define_plate(grid, plate, rng)
+
+static func _define_plate(
 	grid: HexGrid,
-	plate: Dictionary,
-	unassigned: Array,
+	plate: Plate,
 	rng: RandomNumberGenerator
 ) -> void:
-	var frontier = plate.frontier
-	var plate_id = plate.id
-	var max_size = plate.max_size
-	var roughness = plate.roughness
+	var _noise = MapNoise.new(rng.randi(), 4, 0.10)
+	var vertex = plate.hexes[rng.randi_range(0, plate.hexes.size() - 1)]
+	
+	var max_distance = 0
+	for hex in plate.hexes:
+		var d : float = CoordConverter.offsetDistance(hex.coord, plate.coord)
+		var noise = _noise.get_noise(hex)
+		#d += noise * 10
+		if d > max_distance:
+			max_distance = d
+		hex.vertex_distance = d
+	
+	plate.coord = vertex.coord
+	plate.max_distance = max_distance
+	
+	plate.hexes.sort_custom(by_distance)
+	
+	var land_tiles = plate.hexes.size() * Common.LAND_PERCENTAGE / 100
+	
+	var count = 0
+	for hex in plate.hexes:
+		hex.elevation = 0
+		count += 1
+		if count >= land_tiles:
+			break
 
-	var size := 1
-
-	while not frontier.is_empty() and size < max_size:
-		var current = frontier.pop_front()
-		var neighborsCoord = CoordConverter.getOffsetNeighbors(current.coord)
-		for neighborCoord in neighborsCoord:
-			var neighbor = grid.get_hex(neighborCoord)
-			if not unassigned.has(neighbor):
-				continue
-
-			# Probabilità irregolare di crescita
-			if rng.randf() > roughness:
-				continue
-
-			neighbor.plate_id = plate_id
-			neighbor.elevation = 0
-			unassigned.erase(neighbor)
-			frontier.append(neighbor)
-			
-			size += 1
-
-			if size >= max_size:
-				break
+static func by_distance(a, b):
+	return a.vertex_distance < b.vertex_distance
