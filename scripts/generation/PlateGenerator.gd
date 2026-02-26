@@ -10,14 +10,13 @@ static func generate(grid:HexGrid, rng:RandomNumberGenerator):
 		var plate = Plate.new(i)
 		plate.coord = OffsetCoord.new(col, row)
 		plates.append(plate)
-		hex.plate_id = i
 	
 	for hex in grid.hexes.values():
 		var closest = plates[0]
 		var best_dist := INF
 
 		for plate in plates:
-			var d = CoordConverter.offsetDistance(hex.coord, plate.coord)
+			var d = grid.get_distance(hex, plate)
 			if d < best_dist:
 				best_dist = d
 				closest = plate
@@ -26,6 +25,9 @@ static func generate(grid:HexGrid, rng:RandomNumberGenerator):
 		plates[closest.id].add_hex(hex)
 
 	for plate in plates:
+		#avoid empty plates
+		if !plate.hexes.size():
+			continue
 		_define_plate(grid, plate, rng)
 
 static func _define_plate(
@@ -38,15 +40,14 @@ static func _define_plate(
 	
 	var max_distance = 0
 	for hex in plate.hexes:
-		var d : float = CoordConverter.offsetDistance(hex.coord, plate.coord)
+		var d1 : float = grid.get_distance(hex, plate)
+		var d2 : float = grid.get_distance(hex, vertex)
 		var noise = _noise.get_noise(hex)
-		#d += noise * 10
+		d2 = d1 + noise * 10
+		var d = min(d1, d2)
 		if d > max_distance:
 			max_distance = d
 		hex.vertex_distance = d
-	
-	plate.coord = vertex.coord
-	plate.max_distance = max_distance
 	
 	plate.hexes.sort_custom(by_distance)
 	

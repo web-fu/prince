@@ -34,11 +34,15 @@ func neighbors(hex:Hex) -> Array:
 		result.append(self.get_hex(coord))
 	return result
 
-func rand_points(n: int, rng: RandomNumberGenerator):
-	var hexes = []
-	for i in range(n):
-		var col = rng.randi_range(0, self.cols - 1)
-		var row = rng.randi_range(0, self.rows - 1)
-		var hex = self.get_hex(OffsetCoord.new(col, row))
-		hexes.append(hex)
-	return hexes
+func rand_hex(rng: RandomNumberGenerator):
+	var col = rng.randi_range(0, self.cols - 1)
+	var row = rng.randi_range(0, self.rows - 1)
+	return self.get_hex(OffsetCoord.new(col, row))
+
+func get_distance(a, b):
+	var axialA1 = CoordConverter.offsetToAxial(a.coord)
+	var axialA2 = CoordConverter.offsetToAxial(OffsetCoord.new(a.coord.col + cols, a.coord.row))
+	var axialA3 = CoordConverter.offsetToAxial(OffsetCoord.new(a.coord.col - cols, a.coord.row))
+	var axialB = CoordConverter.offsetToAxial(b.coord)
+	
+	return min(CoordConverter.axialDistance(axialA1, axialB), CoordConverter.axialDistance(axialA2, axialB), CoordConverter.axialDistance(axialA3, axialB))

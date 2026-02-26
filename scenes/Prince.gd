@@ -1,12 +1,21 @@
 extends Node3D
 
 @export var seed := 12345
+@export var tectonic_plates := 10
+@export var land_percentage := 50.0
+@export var axis_tilt := 23.0
+@export var grid_size := {
+	cols = 100,
+	rows = 50
+}
 
-var grid: HexGrid
+var rng := RandomNumberGenerator.new()
+var grid : HexGrid
 
 func _ready():
-	var generator = WorldGenerator.new()
-	grid = generator.generate(seed)
+	grid = HexGrid.new(grid_size.cols, grid_size.rows)
+	rng.seed = seed
+	WorldGenerator.generate(grid, rng)
 	$WorldView.draw_world(grid)
 
 

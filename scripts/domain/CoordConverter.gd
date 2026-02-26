@@ -9,6 +9,9 @@ const AXIAL_DIRECTIONS = [
 	{ q = -1, r = 0 },  # North West
 ]
 
+static func randDirection(rng: RandomNumberGenerator):
+	return AXIAL_DIRECTIONS[rng.randi_range(0, 5)]
+
 static func offsetToAxial(coord: OffsetCoord) -> AxialCoord:
 	var q = coord.col
 	var r = coord.row - (coord.col - (coord.col & 1)) / 2
