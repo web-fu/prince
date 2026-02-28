@@ -1,5 +1,6 @@
 extends Camera3D
 
+@onready var prince = $".."
 @onready var tileSelected = $"../TileSelected"
 
 @export var camera_speed = 0.25 
@@ -14,7 +15,7 @@ func _process(delta):
 	if Input.is_action_pressed("camera_move_left"):
 		direction.x -= 1
 		
-	if Input.is_action_pressed("camera_move_down") and position.z < Common.grid_size.rows * 2:
+	if Input.is_action_pressed("camera_move_down") and position.z < prince.grid_size.rows * 2:
 		direction.z += 1
 	if Input.is_action_pressed("camera_move_up") and position.z > AXIS_Z_LOCK:
 		direction.z -= 1
@@ -24,12 +25,12 @@ func _process(delta):
 	if Input.is_action_pressed("camera_zoom_in") and position.y > 10:
 		direction.y -=1
 	
-	if position.x < - Common.grid_size.cols * Common.TILE_SIZE * sqrt(3) / 4:
-		position.x += Common.grid_size.cols * Common.TILE_SIZE * sqrt(3)
-		direction.x += Common.grid_size.cols * Common.TILE_SIZE * sqrt(3)
-	if position.x > Common.grid_size.cols * Common.TILE_SIZE * sqrt(3) * 5 / 4:
-		position.x -= Common.grid_size.cols * Common.TILE_SIZE * sqrt(3)
-		direction.x -= Common.grid_size.cols * Common.TILE_SIZE * sqrt(3)
+	if position.x < - prince.grid_size.cols * Common.TILE_SIZE * sqrt(3) / 4:
+		position.x += prince.grid_size.cols * Common.TILE_SIZE * sqrt(3)
+		direction.x += prince.grid_size.cols * Common.TILE_SIZE * sqrt(3)
+	if position.x > prince.grid_size.cols * Common.TILE_SIZE * sqrt(3) * 5 / 4:
+		position.x -= prince.grid_size.cols * Common.TILE_SIZE * sqrt(3)
+		direction.x -= prince.grid_size.cols * Common.TILE_SIZE * sqrt(3)
 	position = lerp(position, direction, camera_speed)
 
 func get_camera_ground_point() -> Vector3:

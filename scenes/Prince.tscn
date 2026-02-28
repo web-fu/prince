@@ -21,6 +21,7 @@ script = ExtResource("3_f6d0o")
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
 
 [node name="TileSelected" parent="." instance=ExtResource("3_la7yk")]
+visible = false
 
 [node name="TileInfo" type="Panel" parent="TileSelected"]
 anchors_preset = 3

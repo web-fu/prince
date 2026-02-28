@@ -2,9 +2,7 @@ extends Node3D
 
 @onready var game_camera: Camera3D = $"../GameCamera"
 
-var coord := OffsetCoord.new(0, 0)
-var is_selected := true
-
+var coord : OffsetCoord #= OffsetCoord.new(0, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,7 +12,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var coordNew = self.coord
-	if ! is_selected:
+	if ! visible:
 		return
 	if Input.is_action_just_released("axial_move_north"):
 		coordNew = self.coord.north()
@@ -33,7 +31,8 @@ func _process(delta: float) -> void:
 		self.move(coordNew)
 
 func move(coord: OffsetCoord):
-	var coordNorm = CoordConverter.normalize(coord)
+	visible = true
+	var coordNorm = get_parent().grid.normalize(coord)
 	if coordNorm:
 		var hex = get_parent().grid.get_hex(coordNorm)
 		self.position = CoordConverter.offsetToWorld(coord)
