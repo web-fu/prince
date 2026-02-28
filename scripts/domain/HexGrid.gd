@@ -5,6 +5,8 @@ var rows: int
 var axis_tilt := 23.0 # DO NOT PUT 0!
 var temp_min := -10.0
 var temp_max := 40.0
+var tectonic_plates : int
+var land_percentage : float
 
 var hexes := {} # Dictionary<Vector2i, Hex>
 
@@ -29,9 +31,13 @@ func get_hex(coord: OffsetCoord) -> Hex:
 
 func neighbors(hex:Hex) -> Array:
 	var result := []
-	var coords = CoordConverter.getOffsetNeighbors(hex.coord)
-	for coord in coords:
-		result.append(self.get_hex(coord))
+	var axial = CoordConverter.offsetToAxial(hex.coord)
+	var neighbors = CoordConverter.getAxialNeighbors(axial)
+	for neighbor in neighbors:
+		var neighborCoord = CoordConverter.axialToOffset(neighbor)
+		neighborCoord = normalize(neighborCoord)
+		if neighborCoord:
+			result.append(self.get_hex(neighborCoord))
 	return result
 
 func rand_hex(rng: RandomNumberGenerator):
@@ -46,3 +52,10 @@ func get_distance(a, b):
 	var axialB = CoordConverter.offsetToAxial(b.coord)
 	
 	return min(CoordConverter.axialDistance(axialA1, axialB), CoordConverter.axialDistance(axialA2, axialB), CoordConverter.axialDistance(axialA3, axialB))
+
+func normalize(coord: OffsetCoord):
+	if coord.row < 0:
+		return null
+	if coord.row >= rows:
+		return null
+	return OffsetCoord.new((coord.col + cols) % cols, coord.row)

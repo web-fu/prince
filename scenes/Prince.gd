@@ -14,6 +14,10 @@ var grid : HexGrid
 
 func _ready():
 	grid = HexGrid.new(grid_size.cols, grid_size.rows)
+	grid.axis_tilt = axis_tilt
+	grid.land_percentage = land_percentage
+	grid.tectonic_plates = tectonic_plates
+	
 	rng.seed = seed
 	WorldGenerator.generate(grid, rng)
 	$WorldView.draw_world(grid)

@@ -3,7 +3,7 @@ class_name PlateGenerator
 static func generate(grid:HexGrid, rng:RandomNumberGenerator):
 	var plates := []
 	
-	for i in range(Common.TECTONIC_PLATES):
+	for i in range(grid.tectonic_plates):
 		var col = rng.randi_range(0, grid.cols - 1)
 		var row = rng.randi_range(0, grid.rows - 1)
 		var hex = grid.get_hex(OffsetCoord.new(col, row))
@@ -51,7 +51,7 @@ static func _define_plate(
 	
 	plate.hexes.sort_custom(by_distance)
 	
-	var land_tiles = plate.hexes.size() * Common.LAND_PERCENTAGE / 100
+	var land_tiles = plate.hexes.size() * grid.land_percentage / 100
 	
 	var count = 0
 	for hex in plate.hexes:

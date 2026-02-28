@@ -1,15 +1,9 @@
 class_name WorldGenerator
 
-var rng := RandomNumberGenerator.new()
-var grid := HexGrid.new(Common.grid_size.cols, Common.grid_size.rows)
-
-func generate(seed:int):
-	rng.seed = seed
-	var plates = PlateGenerator.generate(grid, rng)
-	Tectonics.compute_stress(grid, plates)
-	ElevationGenerator.apply(grid)
-	Smoothing.smooth(grid)
-	ClimateGenerator.generate(grid, rng)
-	RiverGenerator.generate_rivers(grid, rng)
-
-	return grid
+static func generate(grid, rng):
+	PlateGenerator.generate(grid, rng)
+	#Tectonics.generate(grid)
+	#ElevationGenerator.generate(grid, rng)
+	#Smoothing.smooth(grid)
+	#ClimateGenerator.generate(grid, rng)
+	#RiverGenerator.generate_rivers(grid, rng)

@@ -5,11 +5,9 @@ const TILE_HEIGHT := 0.5
 const MAX_HEIGHT := 5
 const MAX_DEPTH := -2
 const SMOOTH := 5
-const TECTONIC_PLATES := 15
-const LAND_PERCENTAGE := 50.0
 const RIVERS_MAX := 10
-const RIVERS_MIN_HEIGHT := 2
-const RIVERS_MIN_DISTANCE := 15
+const RIVERS_MIN_HEIGHT := 4
+const RIVERS_MIN_DISTANCE := 10
 
 var grid_size := {
 	cols = 100,

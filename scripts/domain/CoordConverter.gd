@@ -56,41 +56,11 @@ static func axialDistance(a, b):
 
 	return (abs(a.q - b.q) + abs(a.r - b.r) + abs(aS - bS)) / 2
 
-static func offsetDistance(a: OffsetCoord, b: OffsetCoord):
-	var axialA1 = offsetToAxial(a)
-	var axialA2 = offsetToAxial(OffsetCoord.new(a.col + Common.grid_size.cols, a.row))
-	var axialA3 = offsetToAxial(OffsetCoord.new(a.col - Common.grid_size.cols, a.row))
-	var axialB = offsetToAxial(b)
-	
-	return min(axialDistance(axialA1, axialB), axialDistance(axialA2, axialB), axialDistance(axialA3, axialB))
-
 static func getAxialNeighbors(axial: AxialCoord):
 	var result = []
 	for dir in AXIAL_DIRECTIONS:
 		result.append(AxialCoord.new(axial.q + dir.q, axial.r + dir.r)) 
 	return result
-
-static func getOffsetNeighbors(coord: OffsetCoord):
-	var axial = offsetToAxial(coord)
-	var neighbors = getAxialNeighbors(axial)
-	var result = []
-	for neighbor in neighbors:
-		var neighborCoord = axialToOffset(neighbor)
-		neighborCoord = normalize(neighborCoord)
-		if neighborCoord:
-			result.append(neighborCoord)
-	return result
-	
-static func getCoordsInRadius(coord: OffsetCoord, radius: int):
-	var results = []
-	var axial = offsetToAxial(coord)
-	for q in range(-radius, radius):
-		for r in range(max(-radius, -q-radius), min(+radius, -q+radius)):
-			var axialResult = axialSum(axial, {q = q, r = r})
-			var offsetResult = normalize(axialToOffset(axialResult))
-			if offsetResult:
-				results.append(offsetResult)
-	return results
 
 static func offsetToWorld(coord: OffsetCoord) -> Vector3:
 	var scale = Common.TILE_SIZE
@@ -107,7 +77,6 @@ static func offsetToWorld(coord: OffsetCoord) -> Vector3:
 
 	return Vector3(worldX, 0, worldZ)
 
-
 static func worldToOffset(world: Vector3) -> OffsetCoord:
 	var scale = Common.TILE_SIZE
 	var r_inner = 1.0
@@ -120,10 +89,3 @@ static func worldToOffset(world: Vector3) -> OffsetCoord:
 	var row = int(round((world.z - (col % 2) * offsetZ) / spacingZ))
 	
 	return OffsetCoord.new(col, row)
-
-static func normalize(coord: OffsetCoord):
-	if coord.row < 0:
-		return null
-	if coord.row >= Common.grid_size.rows:
-		return null
-	return OffsetCoord.new((coord.col + Common.grid_size.cols) % Common.grid_size.cols, coord.row)
